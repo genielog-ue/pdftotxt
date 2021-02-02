@@ -1,5 +1,8 @@
 # PDFTOTXT
 
+Réalisé par Romain Le Talour, Corentin Leconte, Thibaut Quilleré dans le cadre de l'UE Projet de développement.
+**Attention**, ce programme est dans un but scolaire et n'est pas destiné à être utilisé par le grand public.
+
 ## Fonctionnalités:
 
 - Prise en charge de fichier PDF.
@@ -10,11 +13,9 @@
   
 ## Comment l'utiliser:
 
-  `inserer la commande içi`
+  `$ pdftotxt.py [-x inserer la commande içi] abc.pdf`
   
 ## Syntaxe:
-
-  `inserer
-  la
-  syntaxe
-  ici`
+  
+  `[-x]`
+  `inserer la syntaxe ici`
