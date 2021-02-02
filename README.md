@@ -1,7 +1,7 @@
 # PDFTOTXT
 
 Réalisé par Romain Le Talour, Corentin Leconte, Thibaut Quilleré dans le cadre de l'UE Projet de développement.
-**Attention**, ce programme est dans un but scolaire et n'est pas destiné à être utilisé par le grand public.
+**Attention**, ce programme est dans un but scolaire et n'est pas destiné à être utilisé par le grand public.\n
 
 ## Fonctionnalités:
 
