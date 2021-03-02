@@ -15,6 +15,7 @@ Réalisé par Romain Le Talour, Corentin Leconte, Thibaut Quilleré dans le cadr
 ## Comment l'utiliser:
 
   `$ pdftotxt.py [-option] abc.pdf`
+  
   Si le PDF cible n'est pas dans le répertoire du programme taper :
   `$ pdftotxt.py [-option] ../path/to/abc.pdf`
   
