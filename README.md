@@ -22,10 +22,10 @@ Réalisé par Romain Le Talour, Corentin Leconte, Thibaut Quilleré dans le cadr
 ## Syntaxe:
   
   ```
-  [-x] Pour convertir le PDF en un fichier TXT
+  [-t] Pour convertir le PDF en un fichier TXT
   ```
   ```
-  [-t] Pour convertir le PDF en un fichier XML sous la forme :
+  [-x] Pour convertir le PDF en un fichier XML sous la forme :
   <article>      
     <preamble> Le nom du fichier d’origine </preamble>
     <titre> Le titre du papier </titre>
