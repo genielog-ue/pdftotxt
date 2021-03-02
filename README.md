@@ -14,9 +14,18 @@ Réalisé par Romain Le Talour, Corentin Leconte, Thibaut Quilleré dans le cadr
   
 ## Comment l'utiliser:
 
-  `$ pdftotxt.py [-x inserer la commande içi] abc.pdf`
+  `$ pdftotxt.py [-option] abc.pdf`
+  Si le PDF cible n'est pas dans le répertoire du programme taper :
+  `$ pdftotxt.py [-option] ../path/to/abc.pdf`
   
 ## Syntaxe:
   
-  `[-x]`
-  `inserer la syntaxe ici`
+  `[-x] Pour convertir le PDF en un fichier TXT`
+  `[-t] Pour convertir le PDF en un fichier XML sous la forme :
+  <article>      
+    <preamble> Le nom du fichier d’origine </preamble>
+    <titre> Le titre du papier </titre>
+    <auteur> La section auteurs et leur adresse </auteur>
+    <abstract> Le résumé de l’article </abstract>
+    <biblio> Les références bibliographiques du papier</biblio>
+  </article>`
