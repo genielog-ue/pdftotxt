@@ -20,7 +20,9 @@ Réalisé par Romain Le Talour, Corentin Leconte, Thibaut Quilleré dans le cadr
   
 ## Syntaxe:
   
-  `[-x] Pour convertir le PDF en un fichier TXT`
+  ```
+  [-x] Pour convertir le PDF en un fichier TXT
+  ```
   ```
   [-t] Pour convertir le PDF en un fichier XML sous la forme :
   <article>      
