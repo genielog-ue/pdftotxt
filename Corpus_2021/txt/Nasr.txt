@@ -1,0 +1,11 @@
+Nom du PDF : Nasr.pdf
+Titre du PDF : MACAON An NLP Tool Suite for Processing Word Lattices
+Auteur du PDF : Alexis Nasr ; Frederic Bechet ; Jean-Francois Rey ; Benoit Favre ; Joseph Le Roux
+Contenu : 
+ ProceedingsoftheACL-HLT2011SystemDemonstrations
+,pages86Œ91,
+Portland,Oregon,USA,21June2011.
+c
+
+2011AssociationforComputationalLinguistics
+86

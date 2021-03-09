@@ -1,0 +1,8 @@
+Nom du PDF : Boudin-Torres-2006.pdf
+Titre du PDF : A Scalable MMR Approach to Sentence Scoring for Multi-Document Update Summarization
+Auteur du PDF : Florian Boudin ; Marc El-Beze ; Juan-Manuel Torres-Moreno
+Contenu : 
+ Coling2008:CompanionvolumeŒPostersandDemonstrations,
+pages23Œ26
+Manchester,August2008
+23

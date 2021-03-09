@@ -1,0 +1,60 @@
+Nom du PDF : Gonzalez_2018_Wisebe.pdf
+Titre du PDF : WiSeBE: Window-Based Sentence Boundary Evaluation
+Auteur du PDF : Carlos-Emiliano González-Gallardo 
+Contenu : 
+ WiSeBE:Window-BasedSentence
+BoundaryEvaluation
+Carlos-EmilianoGonz´
+alez-Gallardo1,2(B)andJuan-ManuelTorres-Moreno
+1,21LIA-Universit´
+ed’AvignonetdesPaysdeVaucluse,339chemindesMeinajaries,
+84140Avignon,France
+carlos-emiliano.gonzalez-gallardo@alumni.univ-avignon.fr,juan-manuel.torres@univ-avignon.fr2D´epartementdeGIGL,
+´EcolePolytechniquedeMontr´
+eal,C.P.6079,succ.Centre-ville,Montr´
+eal,Qu´
+ebecH3C3A7,Canada
+Abstract.SentenceBoundaryDetection(SBD)hasbeenamajor
+researchtopicsinceAutomaticSpeechRecognitiontranscriptshavebeen
+usedforfurtherNaturalLanguageProcessingtaskslikePartofSpeech
+
+Tagging,QuestionAnsweringorAutomaticSummarization.Butwhat
+aboutevaluation?Dostandardevaluationmetricslikeprecision,recall,
+F-scoreorclassiﬁcationerror;andmoreimportant,evaluatinganauto-
+
+maticsystemagainstauniquereferenceisenoughtoconcludehowwell
+aSBDsystemisperforminggiventheﬁnalapplicationofthetranscript?
+InthispaperweproposeWindow-basedSentenceBoundaryEvaluation
+
+(WiSeBE),asemi-supervisedmetricforevaluatingSentenceBoundary
+Detectionsystemsbasedonmulti-reference(dis)agreement.Weevalu-
+ateandcomparetheperformanceofdtSBDsystemsoveraset
+
+ofYoutubetranscriptsusingWiSeBEandstandardmetrics.Thisdou-
+bleevaluationgivesanunderstandingofhowWiSeBEisamorereliable
+metricfortheSBDtask.
+Keywords:
+SentenceBoundaryDetection
+·Evaluation
+Transcripts
+·Humanjudgment
+1Introduction
+ThegoalofAutomaticSpeechRecognition(ASR)istotransformspokendata
+intoawrittenrepresentation,thusenablingnaturalhuman-machineinteraction
+
+[33]withfurtherNaturalLanguageProcessing(NLP)tasks.Machinetransla-
+tion,questionanswering,semanticparsing,POStagging,sentimentanalysisand
+automatictextsummarization;originallydevelopedtoworkwithformalwrit-
+
+tentexts,canbeappliedoverthetranscriptsmadebyASRsystems[
+2,25,31].However,beforeapplyinganyoftheseNLPtasksasegmentationprocesscalled
+SentenceBoundaryDetection(SBD)shouldbeperformedoverASRtranscripts
+
+toreachaminimalsyntacticinformationinthetext.
+TomeasuretheperformanceofaSBDsystem,theautomaticallysegmented
+transcriptisevaluatedagainstasinglereferencenormallydonebyahuman.But
+cSpringerNatureSwitzerlandAG2018
+I.Batyrshinetal.(Eds.):MICAI2018,LNAI11289,pp.119Œ131,2018.
+
+https://doi.org/10.1007/978-3-030-04497-8
+_10

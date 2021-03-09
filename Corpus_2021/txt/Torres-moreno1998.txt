@@ -1,0 +1,66 @@
+Nom du PDF : Torres-moreno1998.pdf
+Titre du PDF : Efficient Adaptive Learning for Classification Tasks with Binary Units
+Auteur du PDF : joe@next.castanet.com Joe Pickert
+Contenu : 
+ LETTERCommunicatedbyScottFahlman
+EfÞcientAdaptiveLearningforClassiÞcationTaskswith
+BinaryUnits
+J.ManuelTorresMoreno
+MirtaB.Gordon
+D«epartementdeRechercheFondamentalesurlaMati
+`ereCondens
+«ee,CEAGrenoble,
+38054GrenobleCedex9,France
+Thisarticlepresentsanewincrementallearningalgorithmforclassi-
+Þcationtasks,calledNetLines,whichiswelladaptedforbothbinary
+
+andreal-valuedinputpatterns.Itgeneratessmall,compactfeedforward
+
+neuralnetworkswithonehiddenlayerofbinaryunitsandbinaryoutput
+
+units.AconvergencetheoremensuresthatsolutionswithaÞnitenum-
+
+berofhiddenunitsexistforbothbinaryandreal-valuedinputpatterns.
+
+Animplementationforproblemswithmorethantwoclasses,valid
+
+foranybinaryclassiÞer,isproposed.Thegeneralizationerrorand
+
+thesizeoftheresultingnetworksarecomparedtothebestpublished
+
+resultsonwell-knownclassiÞcationbenchmarks.Earlystoppingisshown
+
+todecreaseoverÞtting,withoutimprovingthegeneralizationperfor-
+
+mance.1Introduction
+Feedforwardneuralnetworkshavebeensuccessfullyappliedtotheprob-
+lemoflearningpatternclassiÞcationfromexamples.Therelationshipofthe
+
+numberofweightstothelearningcapacityandthenetworkÕsgeneralization
+
+abilityiswellunderstoodonlyforthesimpleperceptron,asinglebinary
+
+unitwhoseoutputisasigmoidalfunctionoftheweightedsumofitsinputs.
+
+Inthiscase,efÞcientlearningalgorithmsbasedontheoreticalresultsallow
+
+thedeterminationoftheoptimalweights.However,simpleperceptronscan
+
+generalizeonlythose(veryfew)problemsinwhichtheinputpatternsare
+
+linearlyseparable(LS).InmanyactualclassiÞcationtasks,multilayeredper-
+
+ceptronswithhiddenunitsareneeded.However,neitherthearchitecture
+
+(numberofunits,numberoflayers)northefunctionsthathiddenunits
+
+havetolearnareknownapriori,andthetheoreticalunderstandingofthese
+
+networksisnotenoughtoprovideusefulhints.
+AlthoughpatternclassiÞcationisanintrinsicallydiscretetask,itmaybe
+castasaproblemoffunctionapproximationorregressionbyassigningreal
+
+valuestothetargets.Thisistheapproachusedbybackpropagationand
+NeuralComputation
+10,1007Ð1030
+(1998)c°1998MassachusettsInstituteofTechnology
