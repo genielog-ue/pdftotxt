@@ -1,175 +1,29 @@
 Nom du PDF : Torres.pdf
 Titre du PDF : None
-Auteur du PDF : None
-Contenu : 
- SummaryEvaluation
-withandwithoutReferences
-Juan-ManuelTorres-Moreno,HoracioSaggion,IriadaCunha,EricSanJuan,andPatriciaVel
-´azquez-MoralesAbstractŠWestudyanewcontent-basedmethodfor
-theevaluationoftextsummarizationsystemswithout
-humanmodelswhichisusedtoproducesystemrankings.
-Theresearchiscarriedoutusinganewcontent-based
-evaluationframeworkcalled
-FRESA
-tocomputeavarietyof
-divergencesamongprobabilitydistributions.Weapplyour
-comparisonframeworktovariouswell-establishedcontent-based
-evaluationmeasuresintextsummarizationsuchas
-COVERAGE
-,RESPONSIVENESS
-,PYRAMIDS
-andROUGE
-studyingtheir
-associationsinvarioustextsummarizationtasksincluding
+Auteur du PDF : 
+Abstract : —We study a new content-based method for
+the evaluation of text summarization systems without
+human models which is used to produce system rankings.
+The research is carried out using a new content-based
+evaluation framework called F RESA to compute a variety of
+divergences among probability distributions. We apply our
+comparison framework to various well-established content-based
+evaluation measures in text summarization such as C OVERAGE,
+R ESPONSIVENESS, P YRAMIDS and ROUGE studying their
+associations in various text summarization tasks including
+generic multi-document summarization in English and French,
+focus-based multi-document summarization in English and
+generic single-document summarization in French and Spanish.
+Index Terms—Text summarization evaluation, content-based
+evaluation measures, divergences.
 
-genericmulti-documentsummarizationinEnglishandFrench,
-focus-basedmulti-documentsummarizationinEnglishand
-genericsingle-documentsummarizationinFrenchandSpanish.
-IndexTerms
-ŠTextsummarizationevaluation,content-based
-evaluationmeasures,divergences.
-I.I
-NTRODUCTION
-TEXTsummarizationevaluationhasalwaysbeena
-complexandcontroversialissueincomputational
-linguistics.Inthelastdecade,advanceshavebeen
+I. I NTRODUCTION
 
-madeinthisaswellasvariousevaluationmeasureshave
+T
 
-beendesigned.Twoevaluationcampaignshavebeenledby
-
-theU.S.agenceDARPA.Theone,SUMMAC,ranfrom
-
-1996to1998undertheauspicesoftheTipsterprogram[1],
-andthesecondone,entitledDUC(DocumentUnderstanding
-Conference)[2],wasthemainevaluationforumfrom2000
-
-until2007.Nowadays,theTextAnalysisConference(TAC)
-
-[3]providesaforumforassessmentofdifferentinformation
-
-accesstechnologiesincludingtextsummarization.
-Evaluationintextsummarizationcanbeextrinsicor
-intrinsic[4].Inanextrinsicevaluation,thesummariesare
-
-assessedinthecontextofantaskcarriedoutbya
-humanoramachine.Inanintrinsicevaluation,thesummaries
-areevaluatedinreferencetosomeidealmodel.SUMMAC
-
-wasmainlyextrinsicwhileDUCandTACfollowedan
-
-intrinsicevaluationparadigm.Inanintrinsicevaluation,an
-ManuscriptreceivedJune8,2010.ManuscriptacceptedforpublicationJuly
-25,2010.
-Juan-ManuelTorres-MorenoiswithLIA/Universit
-´ed'Avignon,
-Franceand
-´EcolePolytechniquedeMontr
-´eal,Canada
-(juan-manuel.torres@univ-avignon.fr).
-EricSanJuaniswithLIA/Universit
-´ed'Avignon,France
-(eric.sanjuan@univ-avignon.fr).
-HoracioSaggioniswithDTIC/UniversitatPompeuFabra,Spain
-(horacio.saggion@upf.edu).IriadaCunhaiswithIULA/UniversitatPompeuFabra,Spain;
-LIA/Universit
-´ed'Avignon,FranceandInstitutodeIngenier
-´AM,Mexico
-(iria.dacunha@upf.edu).PatriciaVel
-´azquez-MoralesiswithVMLabs,France
-(patriciavelazquez@yahoo.com).
-automaticallygeneratedsummary(
-peer)hastobecompared
-withoneormorereferencesummaries(
-models).DUCused
-aninterfacecalledSEEtoallowhumanjudgestocompare
-apeerwitha
-model.Thus,judgesgiveaC
-OVERAGE
-scoretoeach
-peerproducedbyasystemandthesystem
-COVERAGE
-scoreistheaverageoftheC
-OVERAGE
-'sscores
-asigned.Thesesystem'sC
-OVERAGE
-scorescanthenbeused
-toranksummarizationsystems.Inthecaseofquery-focused
-
-summarization(e.g.whenthesummaryshouldanswera
-questionorseriesofquestions)aR
-ESPONSIVENESS
-scoreisalsoassignedtoeachsummary,whichindicateshow
-
-responsivethesummaryistothequestion(s).
-Becausemanualcomparisonofpeersummarieswithmodel
-summariesisanarduousandcostlyprocess,abodyof
-
-researchhasbeenproducedinthelastdecadeonautomatic
-
-content-basedevaluationprocedures.Earlystudiesusedtext
-
-similaritymeasuressuchascosinesimilarity(withorwithout
-
-weightingschema)tocomparepeerandmodelsummaries
-
-[5].Variousvocabularyoverlapmeasuressuchas
-n-gramsoverlaporlongestcommonsubsequencebetweenpeerand
-
-modelhavealsobeenproposed[6],[7].TheB
-LEU
-machinetranslationevaluationmeasure[8]hasalsobeentestedin
-
-summarization[9].TheDUCconferencesadoptedtheR
-OUGE
-packageforcontent-basedevaluation[10].R
-OUGE
-implementsaseriesofrecallmeasuresbasedon
-n-gramco-occurrence
-betweenapeersummaryandasetofmodelsummaries.These
-
-measuresareusedtoproducesystems'rank.Ithasbeenshown
-
-thatsystemrankings,producedbysomeR
-OUGE
-measures(e.g.,R
-OUGE
--2,whichuses2-grams),haveacorrelationwith
-rankingsproducedusingC
-OVERAGE
-.InrecentyearstheP
-YRAMIDS
-evaluationmethod[11]has
-beenintroduced.Itisbasedonthedistributionofﬁcontentﬂ
-ofasetofmodelsummaries.SummaryContentUnits(SCUs)
-
-areinthemodelsummaries,theneachSCU
-
-receivesaweightwhichisthenumberofmodelscontaining
-
-orexpressingthesameunit.PeerSCUsareinthe
-peer,matchedagainstmodelSCUs,andweightedaccordingly.
-TheP
-YRAMIDS
-scoregiventoapeeristheratioofthesum
-oftheweightsofitsunitsandthesumoftheweightsofthe
-
-bestpossibleidealsummarywiththesamenumberofSCUsas
-
-thepeer.TheP
-YRAMIDS
-scorescanbealsousedforranking
-summarizationsystems.[11]showedthatP
-YRAMIDS
-scoresproducedreliablesystemrankingswhenmultiple(4ormore)
-modelswereusedandthatP
-YRAMIDS
-rankingscorrelatewith
-rankingsproducedbyR
-OUGE
--2andR
-OUGE
--SU2(i.e.R
-OUGE
-withskip2-grams).However,thismethodrequiresthecreation
+EXT summarization evaluation has always been a
+complex and controversial issue in computational
+linguistics. In the last decade, significant advances have been
+made in this field as well as various evaluation measures have
+been designed. Two evaluation campaigns have been led by
+the U.S. agence DARPA. The first one, SUMMAC, ran from

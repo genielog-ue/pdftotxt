@@ -1,130 +1,23 @@
 Nom du PDF : kesslerMETICS-ICDIM2019.pdf
 Titre du PDF : None
-Auteur du PDF : None
-Contenu : 
- Awordembeddingapproachtoexploreacollection
-ofdiscussionsofpeopleinpsychologicaldistress
-1
-st
-R
-´
-emyKessler
-Universit
-´
-eBretagneSud
-CNRS6074A
-56017Vannes,France
-remy.kessler@univ-ubs.fr
-2
-nd
-NicolasB
-´
-echet
-Universit
-´
-eBretagneSud
-CNRS6074A
-56017Vannes,France
-nicolas.bechet@irisa.fr
-3
-rd
-GudrunLedegen
-Universit
-´
-eRennesII
-PREFics,EA4246
-5043Rennes,France
-gudrun.ledegen@univ-rennes2.fr
-4
-rd
-FredericPugni
-˚
-ere-Saavedra
-Universit
-´
-eBretagneSud
-PREFics,EA4246
-56017Vannes,France
-frederic.pugniere-saavedra@univ-ubs.fr
-Abstract
-ŠInordertobetteradapttosociety,anassociation
-hasdevelopedawebchatapplicationthatallowsanyoneto
-expressandsharetheirconcernsandanguishes.Severalthousand
-anonymousconversationshavebeengatheredandformanew
-corpusofstoriesabouthumandistressandsocialviolence.We
-presentamethodofcorpusanalysiscombiningunsupervised
-learningandwordembeddinginordertobringoutthethemes
-ofthisparticularcollection.Wecomparethisapproachwitha
-standardalgorithmoftheliteratureonalabeledcorpusand
-obtainverygoodresults.Aninterpretationoftheobtained
-clusterscollectiontheinterestofthemethod.
-Keywords
-Šword2vec,unsupervisedlearning,wordembedding.
-I.I
-NTRODUCTION
-Sincethenineties,socialsufferinghasbeenathemethathas
-receivedmuchattentionfrompublicandassociativeaction.
-Amongtheconsequences,thereisanexplosionoflistening
-placesorsocio-technicaldevicesofcommunicationwhose
-objectivesconsistinmoderatingthevariousformsofsuffering
-bytheliberationofthespeechforatherapeuticpurpose[1]
-[2].AspartoftheMETICSproject,asuicideprevention
-associationdevelopedanapplicationof
-webchat
-tomeet
-thisneed.The
-webchat
-isanareathatallowsanyoneto
-expressandsharewithavolunteerlistenertheirconcernsand
-anguishes.Themainofthisdeviceisitsanonymous
-nature.Protectedbyapseudonym,thewritersareinvited
-todiscusswithavolunteertheproblematicaspectsoftheir
-existence.Severalthousandanonymousconversationshave
-beengatheredandformacorpusofunpublishedstoriesabout
-humandistress.ThepurposeoftheMETICSprojectistomake
-visibletheordinaryformsofsufferingusuallyremovedfrom
-commonspacesandtograspbothitsmodesofenunciationand
-digitalsupport.Inthisstudy,wewanttoautomaticallyidentify
-thereasonforcomingonthewebchatforeachparticipant.
-Indeed,eveniftheassociationprovideduswiththetheme
-ofalltheconversations(work,loneliness,violence,racism,
-addictions,family,etc.),theoriginalreasonhasnotbeen
-preserved.Inwhatfollows,wereviewsomeoftherelated
-workinSectionII.SectionIIIpresentstheresourcesusedand
-givessomestatisticsaboutthecollection.Anoverviewofthe
-systemandthestrategyforidentifythereasonforcoming
-onthewebchatisgiveninSectionIV.SectionVpresents
-theexperimentalprotocol,anevaluationofoursystemandan
-interpretationoftheresultsonthecollectionofhuman
-distress.
-II.R
-ELATEDWORKS
-Themaincharacteristicoftheapproachpresentedinthis
-paperistoonlyhavetoprovidethelabelsoftheclassesto
-bepredicted.Thismethoddoesnotneedtohaveatagged
-datasettopredictthedifferentclasses,soitisclosertoan
-unsupervised(clustering)orsemi-supervisedlearningmethod
-thanasupervised.Themainideaofclusteringistogroup
-untaggeddataintoanumberofclusters,suchthatsimilarex-
-amplesaregroupedtogetheranddifferentonesareseparated.
-Inclustering,thenumberofclassesandthedistributionof
-instancesbetweenclassesareunknownandthegoalisto
-meaningfulclusters.
-Onekindofclusteringmethodsisthepartitioning-based
-one.Thek-meansalgorithm[3]isoneofthemostpopu-
-larpartitioning-basedalgorithmsbecauseitprovidesagood
-compromisebetweenthequalityofthesolutionobtainedand
-itscomputationalcomplexity[4].K-meansaimstok
-centroids,oneforeachcluster,minimizingthesumofthe
-distancesofeachinstanceofdatafromitsrespectivecentroid.
-Wecanciteotherpartitioning-basedalgorithmssuchask-
-medoidsorPAM(PartitionAroundMedoids),whichisan
-evolutionofk-means[5].Hierarchicalapproachesproduce
-clustersbyrecursivelypartitioningdatabackwardsorupwards.
-Forexample,inahierarchicalascendingor
-CAH[6],eachexamplefromtheinitialdatasetrepresentsa
-cluster.Then,theclustersaremerged,accordingtoasimilarity
-measure,untilthedesiredtreestructureisobtained.Theresult
-ofthisclusteringmethodiscalledadendrogram.Density-
-basedmethodsliketheEMalgorithm[7]assumethatthedata
-belongingtoeachclusterisderivedfromaprobability
+Auteur du PDF : 
+Abstract : —In order to better adapt to society, an association
+has developed a web chat application that allows anyone to
+express and share their concerns and anguishes. Several thousand
+anonymous conversations have been gathered and form a new
+corpus of stories about human distress and social violence. We
+present a method of corpus analysis combining unsupervised
+learning and word embedding in order to bring out the themes
+of this particular collection. We compare this approach with a
+standard algorithm of the literature on a labeled corpus and
+obtain very good results. An interpretation of the obtained
+clusters collection confirms the interest of the method.
+Keywords—word2vec, unsupervised learning, word embedding.
+
+I. I NTRODUCTION
+Since the nineties, social suffering has been a theme that has
+received much attention from public and associative action.
+Among the consequences, there is an explosion of listening
+places or socio-technical devices of communication whose
+objectives consist in moderating the various forms of suffering
+by the liberation of the speech for a therapeutic purpose [

@@ -1,50 +1,8 @@
 Nom du PDF : Mikolov.pdf
-Titre du PDF : 
+Titre du PDF : None
 Auteur du PDF : 
-Contenu : 
- EstimationofWordRepresentationsin
-VectorSpace
-TomasMikolov
-GoogleInc.,MountainView,CA
-tmikolov@google.com
-KaiChen
-GoogleInc.,MountainView,CA
-kaichen@google.com
-GregCorrado
-GoogleInc.,MountainView,CA
-gcorrado@google.com
-JeffreyDean
-GoogleInc.,MountainView,CA
-jeff@google.com
-Abstract
-Weproposetwonovelmodelarchitecturesforcomputingcontinuousvectorrepre-
-sentationsofwordsfromverylargedatasets.Thequalityoftheserepresentations
-ismeasuredinawordsimilaritytask,andtheresultsarecomparedtotheprevi-
-ouslybestperformingtechniquesbasedondifferenttypesofneuralnetworks.We
-observelargeimprovementsinaccuracyatmuchlowercomputationalcost,i.e.it
-takeslessthanadaytolearnhighqualitywordvectorsfroma1.6billionwords
-dataset.Furthermore,weshowthatthesevectorsprovidestate-of-the-artperfor-
-manceonourtestsetformeasuringsyntacticandsemanticwordsimilarities.
-1Introduction
-ManycurrentNLPsystemsandtechniquestreatwordsasatomicunits-thereisnonotionofsimilar-
-itybetweenwords,asthesearerepresentedasindicesinavocabulary.Thischoicehasseveralgood
-reasons-simplicity,robustnessandtheobservationthatsimplemodelstrainedonhugeamountsof
-dataoutperformcomplexsystemstrainedonlessdata.AnexampleisthepopularN-grammodel
-usedforstatisticallanguagemodeling-today,itispossibletotrainN-gramsonvirtuallyallavailable
-data(trillionsofwords[3]).
-However,thesimpletechniquesareattheirlimitsinmanytasks.Forexample,theamountof
-relevantin-domaindataforautomaticspeechrecognitionislimited-theperformanceisusually
-dominatedbythesizeofhighqualitytranscribedspeechdata(oftenjustmillionsofwords).In
-machinetranslation,theexistingcorporaformanylanguagescontainonlyafewbillionsofwords
-orless.Thus,therearesituationswheresimplescalingupofthebasictechniqueswillnotresultin
-anyprogress,andwehavetofocusonmoreadvancedtechniques.
-Withprogressofmachinelearningtechniquesinrecentyears,ithasbecomepossibletotrainmore
-complexmodelsonmuchlargerdataset,andtheytypicallyoutperformthesimplemodels.Probably
-themostsuccessfulconceptistousedistributedrepresentationsofwords[10].Forexample,neural
-networkbasedlanguagemodelsoutperformN-grammodels[1,27,17].
-1.1GoalsofthePaper
-Themaingoalofthispaperistointroducetechniquesthatcanbeusedforlearninghigh-qualityword
-vectorsfromhugedatasetswithbillionsofwords,andwithmillionsofwordsinthevocabulary.As
-farasweknow,noneofthepreviouslyproposedarchitectureshasbeensuccessfullytrainedonmore
-1
-arXiv:1301.3781v3  [cs.CL]  7 Sep 2013
+Abstract : 
+We propose two novel model architectures for computing continuous vector representations of words from very large data sets. The quality of these representations
+is measured in a word similarity task, and the results are compared to the previously best performing techniques based on different types of neural networks. We
+observe large improvements in accuracy at much lower computational cost, i.e. it
+takes less than a day to learn high quality word vectors from a 

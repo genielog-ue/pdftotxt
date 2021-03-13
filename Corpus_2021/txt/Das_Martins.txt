@@ -1,49 +1,13 @@
 Nom du PDF : Das_Martins.pdf
-Titre du PDF : 
+Titre du PDF : None
 Auteur du PDF : 
-Contenu : 
- ASurveyonAutomaticTextSummarization
-DipanjanDasAndreF.T.Martins
-LanguageTechnologiesInstitute
-CarnegieMellonUniversity
-f
-dipanjan,afm
-g
-@cs.cmu.edu
-November21,2007
-Abstract
-Theincreasingavailabilityofonlineinformationhasnecessitatedintensive
-researchintheareaofautomatictextsummarizationwithintheNaturalLan-
-guageProcessing(NLP)community.Overthepasthalfacentury,theprob-
-lemhasbeenaddressedfrommanytperspectives,invaryingdomains
-andusingvariousparadigms.Thissurveyintendstoinvestigatesomeofthe
-mostrelevantapproachesbothintheareasofsingle-documentandmultiple-
-documentsummarization,givingspecialemphasistoempiricalmethodsand
-extractivetechniques.Somepromisingapproachesthatconcentrateonsp
-detailsofthesummarizationproblemarealsodiscussed.Specialattentionis
-devotedtoautomaticevaluationofsummarizationsystems,asfutureresearch
-onsummarizationisstronglydependentonprogressinthisarea.
-1Introduction
-TheofsummarizationhasbeeninvestigatedbytheNLPcommunityfor
-nearlythelasthalfcentury.Radevetal.(2002)a
-summary
-as\atextthat
-isproducedfromoneormoretexts,thatconveysimportantinformationinthe
-originaltext(s),andthatisnolongerthanhalfoftheoriginaltext(s)andusually
-tlylessthanthat".Thissimplecapturesthreeimportantaspects
-thatcharacterizeresearchonautomaticsummarization:
+Abstract : 
+The increasing availability of online information has necessitated intensive
+research in the area of automatic text summarization within the Natural Language Processing (NLP) community. Over the past half a century, the problem has been addressed from many different perspectives, in varying domains
+and using various paradigms. This survey intends to investigate some of the
+most relevant approaches both in the areas of single-document and multipledocument summarization, giving special emphasis to empirical methods and
+extractive techniques. Some promising approaches that concentrate on specific
+details of the summarization problem are also discussed. Special attention is
+devoted to automatic evaluation of summarization systems, as future research
+on summarization is strongly dependent on progress in this area.
 
-Summariesmaybeproducedfroma
-singledocument
-or
-multipledocuments
-,
-
-Summariesshouldpreserveimportantinformation,
-
-Summariesshouldbeshort.
-Evenifweagreeunanimouslyonthesepoints,itseemsfromtheliteraturethat
-anyattempttoprovideamoreelaborateforthetaskwouldresultin
-disagreementwithinthecommunity.Infact,manyapproachesonthemanner
-oftheirproblemformulations.Westartbyintroducingsomecommontermsinthe
-1
