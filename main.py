@@ -42,30 +42,37 @@ def getReferences(path, file, parserDirectory):
         parse.close()
         if regex:
             return regex[-1]
-        else :
+        else:
             return "REFERENCES NOT FOUND "
 
-def getTitle(path,file,parserDirectory):
+
+def getTitle(path, file, parserDirectory):
     with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
-        content=parse.read().decode("utf-8")
+        content = parse.read().decode("utf-8")
         parse.close()
-        regex=re.search("TODO ",content,flags=re.IGNORECASE | re.DOTALL )
+        regex = re.search("TODO ", content, flags=re.IGNORECASE | re.DOTALL)
         if regex:
             return regex
         else:
             return "TITLE NOT FOUND "
 
-def writeFile(path,txtDirectory,file,parameter,dictionnaire):
-    if(parameter=="-t"):
-        my_file=open(path+txtDirectory+'/'+file.removesuffix(".pdf")+".txt","w+")
+
+def writeFile(path, txtDirectory, file, parameter, dictionnaire):
+    if parameter == "-t":
+        my_file = open(path + txtDirectory + '/' + file.removesuffix(".pdf") + ".txt", "w+")
         for i in dictionnaire:
             my_file.write(i)
-            my_file.write(dictionnaire[i]+'\n')
+            my_file.write(dictionnaire[i] + '\n')
         my_file.close()
-    elif(parameter=="-x"):
-        my_file=open(file.removesuffix(".pdf")+".xml","w+")
+    elif parameter == "-x":
+        my_file = open(file.removesuffix(".pdf") + ".xml", "w+")
+
 
 def get_info(path):
+    """
+
+    :param path: Chemin absolu ou relatif du dossier de PDF
+    """
     parserDirectory = "parsers"
     txtDirectory = "txt"
 
@@ -81,7 +88,7 @@ def get_info(path):
                  os.path.isfile(path + fichiers) and fichiers.endswith(".pdf")]
     print(directory)
     for file in directory:
-        dictionnaire={}
+        dictionnaire = {}
         ## Appel pdftotext pour convertir les pdf en txt vers le dossier parserDirectory
         os.system("pdftotext " + '"' + path + file + '"' + " " + path + parserDirectory + "/" + '"' + (
                 file.removesuffix(".pdf") + ".txt") + '"')
@@ -91,34 +98,34 @@ def get_info(path):
             number_of_pages = reader.getNumPages()
             page = reader.getPage(0)
             page_content = page.extractText()
-            #print(page_content)
+            # print(page_content)
 
         ## Ecriture nom du fichier
         name = file
-        print("Nom du PDF")
-        print(name, '\n')
-        dictionnaire["Nom : "]=name #Stockage du nom du PDF dans le dictionnaire
+        dictionnaire["Nom : "] = name  # Stockage du nom du PDF dans le dictionnaire
         ###
+
         ## Ecriture Titre du pdf
         title = info.title
         if title is None or not title:
             title = "None"
         print("Titre du PDF")
         print(title, '\n')
-        dictionnaire["Titre du PDF : "]=title
+        dictionnaire["Titre du PDF : "] = title
         ###
+
         ## Ecriture information auteur
         author = info.author
         if author is None or not author:
             author = getAuthor(path, file, parserDirectory)
-        print("Auteur du PDF")
-        print(author, '\n')
-        dictionnaire["Auteur du PDF : "]=author
+        dictionnaire["Auteur du PDF : "] = author
         ###
+
         ## Ecriture emails
         for i in getEmail(path, file, parserDirectory):
-            ite=1
-            dictionnaire["Email "+str(ite)+" : "]=i
+            ite = 1
+            dictionnaire["Email " + str(ite) + " : "] = i
+        ###
         ## Ecriture Contenu fichier PDF
         content = ""
         with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
@@ -129,12 +136,14 @@ def get_info(path):
                     regex = re.search('\n\n(.+?)(Introduction|1)', content, flags=re.IGNORECASE | re.DOTALL)
                 dictionnaire["Abstract"] = regex.group(1)
             except AttributeError:
-                dictionnaire["Abstract"]="Abstract : NOT FOUND"
+                dictionnaire["Abstract"] = "Abstract : NOT FOUND"
             parse.close()
         ###
         # Ecriture references
-        dictionnaire["References : "]=getReferences(path,file,parserDirectory)
-        writeFile(path,txtDirectory,file,"-t",dictionnaire)
+        dictionnaire["References : "] = getReferences(path, file, parserDirectory)
+        writeFile(path, txtDirectory, file, "-t", dictionnaire)
+
+
 if __name__ == '__main__':
     path = input("Tapez le chemin du dossier (exemple '../Corpus_2021' : \n")
     get_info(path)
