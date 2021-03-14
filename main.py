@@ -66,12 +66,21 @@ def writeFile(path, txtDirectory, file, parameter, dictionnaire):
         my_file.close()
     elif parameter == "-x":
         my_file = open(file.removesuffix(".pdf") + ".xml", "w+")
+        my_file.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
+        my_file.write("<article>\n")
+        my_file.write("<preamble>"+dictionnaire["Titre du PDF : "].replace("\n"," ")+"</preamble>")
+        my_file.write("<titre>"+dictionnaire["Titre du PDF : "].replace("\n"," ")+"</titre>")
+        my_file.write("<auteur>"+dictionnaire["Auteur du PDF : "].replace("\n"," ")+"</titre>")
+        my_file.write("<biblio>"+dictionnaire["References : "].replace("\n"," ")+"</biblio>")
+        my_file.write("\n</article>")
+        my_file.close()
 
 
 def get_info(path):
     """
 
     :param path: Chemin absolu ou relatif du dossier de PDF
+    param parameter: -t ou -x pour construire le fichier de sortie en .txt ou .xml
     """
     parserDirectory = "parsers"
     txtDirectory = "txt"
@@ -109,9 +118,7 @@ def get_info(path):
         title = info.title
         if title is None or not title:
             title = "None"
-        print("Titre du PDF")
-        print(title, '\n')
-        dictionnaire["Titre du PDF : "] = title
+        dictionnaire["Titre du PDF : "]=title
         ###
 
         ## Ecriture information auteur
