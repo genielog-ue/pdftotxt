@@ -21,11 +21,39 @@ def reinitDirectory(path, parserDirectory, txtDirectory):
         os.mkdir(path + parserDirectory)
 
 
-def getAuthor(path, parserDirectory):
-    author = ""
+def getAuthor(path, file, parserDirectory):
+    author = "None"
 
     return author
 
+
+def getEmail(path, file, parserDirectory):
+    with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
+        content = parse.read().decode("utf-8")
+        regex = re.findall(r'[\w.-]+@[\w.-]+', content)
+        parse.close()
+        return regex
+
+
+def getReferences(path, file, parserDirectory):
+    with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
+        content = parse.read().decode("utf-8")
+        regex = re.findall(r'(?<=References).*', content, flags=re.IGNORECASE | re.DOTALL)
+        parse.close()
+        if regex:
+            return regex[-1]
+        else :
+            return "REFERENCES NOT FOUND "
+
+def getTitle(path,file,parserDirectory):
+    with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
+        content=parse.read().decode("utf-8")
+        parse.close()
+        regex=re.search("TODO ",content,flags=re.IGNORECASE | re.DOTALL )
+        if regex:
+            return regex
+        else:
+            return "TITLE NOT FOUND "
 
 def get_info(path):
     parserDirectory = "parsers"
@@ -52,7 +80,7 @@ def get_info(path):
             number_of_pages = reader.getNumPages()
             page = reader.getPage(0)
             page_content = page.extractText()
-            print(page_content)
+            #print(page_content)
         my_file = open("tmp.txt", "w+")  # creation d'un fichier temporaire
 
         ## Ecriture nom du fichier
@@ -72,11 +100,16 @@ def get_info(path):
         ## Ecriture information auteur
         author = info.author
         if author is None or not author:
-            author = getAuthor(path,parserDirectory)
+            author = getAuthor(path, file, parserDirectory)
         print("Auteur du PDF")
         print(author, '\n')
         my_file.write("Auteur du PDF : " + author + '\n')
         ###
+        ## Ecriture emails
+        my_file.write("Email : ")
+        for i in getEmail(path, file, parserDirectory):
+            my_file.write(i + " ")
+        my_file.write("\n")
         ## Ecriture Contenu fichier PDF
         content = ""
         with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
@@ -92,6 +125,8 @@ def get_info(path):
                 my_file.write("Abstract : NOT FOUND")
             parse.close()
         ###
+        # Ecriture references
+        my_file.write("\nReferences : " + getReferences(path,file,parserDirectory) + '\n')
 
         my_file.close()  # fermeture du fichier
 

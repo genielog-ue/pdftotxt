@@ -1,6 +1,7 @@
 Nom du PDF : kesslerMETICS-ICDIM2019.pdf
 Titre du PDF : None
-Auteur du PDF : 
+Auteur du PDF : None
+Email : remy.kessler@univ-ubs.fr nicolas.bechet@irisa.fr gudrun.ledegen@univ-rennes2.fr frederic.pugniere-saavedra@univ-ubs.fr 
 Abstract : —In order to better adapt to society, an association
 has developed a web chat application that allows anyone to
 express and share their concerns and anguishes. Several thousand
@@ -21,3 +22,4 @@ Among the consequences, there is an explosion of listening
 places or socio-technical devices of communication whose
 objectives consist in moderating the various forms of suffering
 by the liberation of the speech for a therapeutic purpose [
+References : REFERENCES NOT FOUND 

@@ -1,6 +1,7 @@
 Nom du PDF : Boudin-Torres-2006.pdf
 Titre du PDF : A Scalable MMR Approach to Sentence Scoring for Multi-Document Update Summarization
 Auteur du PDF : Florian Boudin ; Marc El-Beze ; Juan-Manuel Torres-Moreno
+Email : florian.boudin@univ-avignon.fr juan-manuel.torres@univ-avignon.fr marc.elbeze@univ-avignon.fr 
 Abstract : 
 
 redundancy with previously read documents (history) has to be removed from the extract.
@@ -23,3 +24,20 @@ this approach requires to manually write the sentence ranking scheme. Several st
 from history were used by (Boudin and TorresMoreno, 2007) to minimize history’s redundancy.
 (Lin et al., 2007) have proposed a modified Maximal Marginal Relevance (MMR) (Carbonell and
 Goldstein, 
+References : 
+
+Ye, S., L. Qiu, T.S. Chua, and M.Y. Kan. 2005. NUS
+at DUC 2005: Understanding documents via concept links. In Document Understanding Conference
+(DUC).
+
+Boudin, F. and J.M. Torres-Moreno. 2007. A Cosine Maximization-Minimization approach for UserOriented Multi-Document Update Summarization.
+In Recent Advances in Natural Language Processing
+(RANLP), pages 81–87.
+Carbonell, J. and J. Goldstein. 1998. The use of MMR,
+diversity-based reranking for reordering documents
+and producing summaries. In 21st annual international ACM SIGIR conference on Research and development in information retrieval, pages 335–336.
+ACM Press New York, NY, USA.
+
+26
+
+
