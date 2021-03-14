@@ -1,6 +1,13 @@
-Nom : Das_Martins.pdf
-Titre du PDF : None
-Auteur du PDF : None
+A Survey on Automatic Text Summarization
+Dipanjan Das
+
+André F.T. Martins
+
+Language Technologies Institute
+Carnegie Mellon University
+{dipanjan, afm}@cs.cmu.edu
+November 21, 2007
+
 Abstract
 The increasing availability of online information has necessitated intensive
 research in the area of automatic text summarization within the Natural Language Processing (NLP) community. Over the past half a century, the problem has been addressed from many different perspectives, in varying domains
@@ -11,8 +18,162 @@ details of the summarization problem are also discussed. Special attention is
 devoted to automatic evaluation of summarization systems, as future research
 on summarization is strongly dependent on progress in this area.
 
+1
 
-References : 
+Introduction
+
+The subfield of summarization has been investigated by the NLP community for
+nearly the last half century. Radev et al. (2002) define a summary as “a text that
+is produced from one or more texts, that conveys important information in the
+original text(s), and that is no longer than half of the original text(s) and usually
+significantly less than that”. This simple definition captures three important aspects
+that characterize research on automatic summarization:
+• Summaries may be produced from a single document or multiple documents,
+• Summaries should preserve important information,
+• Summaries should be short.
+Even if we agree unanimously on these points, it seems from the literature that
+any attempt to provide a more elaborate definition for the task would result in
+disagreement within the community. In fact, many approaches differ on the manner
+of their problem formulations. We start by introducing some common terms in the
+1
+
+summarization dialect: extraction is the procedure of identifying important sections
+of the text and producing them verbatim; abstraction aims to produce important
+material in a new way; fusion combines extracted parts coherently; and compression
+aims to throw out unimportant sections of the text (Radev et al., 2002).
+Earliest instances of research on summarizing scientific documents proposed
+paradigms for extracting salient sentences from text using features like word and
+phrase frequency (Luhn, 1958), position in the text (Baxendale, 1958) and key
+phrases (Edmundson, 1969). Various work published since then has concentrated on
+other domains, mostly on newswire data. Many approaches addressed the problem
+by building systems depending of the type of the required summary. While extractive
+summarization is mainly concerned with what the summary content should be, usually relying solely on extraction of sentences, abstractive summarization puts strong
+emphasis on the form, aiming to produce a grammatical summary, which usually
+requires advanced language generation techniques. In a paradigm more tuned to
+information retrieval (IR), one can also consider topic-driven summarization, that
+assumes that the summary content depends on the preference of the user and can
+be assessed via a query, making the final summary focused on a particular topic.
+A crucial issue that will certainly drive future research on summarization is
+evaluation. During the last fifteen years, many system evaluation competitions like
+TREC,1 DUC2 and MUC3 have created sets of training material and have established baselines for performance levels. However, a universal strategy to evaluate
+summarization systems is still absent.
+In this survey, we primarily aim to investigate how empirical methods have been
+used to build summarization systems. The rest of the paper is organized as follows: Section 2 describes single-document summarization, focusing on extractive
+techniques. Section 3 progresses to discuss the area of multi-document summarization, where a few abstractive approaches that pioneered the field are also considered.
+Section 4 briefly discusses some unconventional approaches that we believe can be
+useful in the future of summarization research. Section 5 elaborates a few evaluation techniques and describes some of the standards for evaluating summaries
+automatically. Finally, Section 6 concludes the survey.
+
+2
+
+Single-Document Summarization
+
+Usually, the flow of information in a given document is not uniform, which means
+that some parts are more important than others. The major challenge in summarization lies in distinguishing the more informative parts of a document from the
+less ones. Though there have been instances of research describing the automatic
+creation of abstracts, most work presented in the literature relies on verbatim extraction of sentences to address the problem of single-document summarization. In
+1
+
+See http://trec.nist.gov/.
+See http://duc.nist.gov/.
+3
+See http://www.itl.nist.gov/iad/894.02/related projects/muc/proceedings/.
+muc 7 toc.html
+2
+
+2
+
+this section, we describe some eminent extractive techniques. First, we look at early
+work from the 1950s and 60s that kicked off research on summarization. Second,
+we concentrate on approaches involving machine learning techniques published in
+the 1990s to today. Finally, we briefly describe some techniques that use a more
+complex natural language analysis to tackle the problem.
+
+2.1
+
+Early Work
+
+Most early work on single-document summarization focused on technical documents.
+Perhaps the most cited paper on summarization is that of (Luhn, 1958), that describes research done at IBM in the 1950s. In his work, Luhn proposed that the
+frequency of a particular word in an article provides an useful measure of its significance. There are several key ideas put forward in this paper that have assumed
+importance in later work on summarization. As a first step, words were stemmed to
+their root forms, and stop words were deleted. Luhn then compiled a list of content
+words sorted by decreasing frequency, the index providing a significance measure of
+the word. On a sentence level, a significance factor was derived that reflects the
+number of occurrences of significant words within a sentence, and the linear distance
+between them due to the intervention of non-significant words. All sentences are
+ranked in order of their significance factor, and the top ranking sentences are finally
+selected to form the auto-abstract.
+Related work (Baxendale, 1958), also done at IBM and published in the same
+journal, provides early insight on a particular feature helpful in finding salient parts
+of documents: the sentence position. Towards this goal, the author examined 200
+paragraphs to find that in 85% of the paragraphs the topic sentence came as the first
+one and in 7% of the time it was the last sentence. Thus, a naive but fairly accurate
+way to select a topic sentence would be to choose one of these two. This positional
+feature has since been used in many complex machine learning based systems.
+Edmundson (1969) describes a system that produces document extracts. His
+primary contribution was the development of a typical structure for an extractive
+summarization experiment. At first, the author developed a protocol for creating
+manual extracts, that was applied in a set of 400 technical documents. The two
+features of word frequency and positional importance were incorporated from the
+previous two works. Two other features were used: the presence of cue words
+(presence of words like significant, or hardly), and the skeleton of the document
+(whether the sentence is a title or heading). Weights were attached to each of these
+features manually to score each sentence. During evaluation, it was found that about
+44% of the auto-extracts matched the manual extracts.
+
+2.2
+
+Machine Learning Methods
+
+In the 1990s, with the advent of machine learning techniques in NLP, a series of seminal publications appeared that employed statistical techniques to produce document
+extracts. While initially most systems assumed feature independence and relied on
+naive-Bayes methods, others have focused on the choice of appropriate features and
+3
+
+on learning algorithms that make no independence assumptions. Other significant
+approaches involved hidden Markov models and log-linear models to improve extractive summarization. A very recent paper, in contrast, used neural networks and
+third party features (like common words in search engine queries) to improve purely
+extractive single document summarization. We next describe all these approaches
+in more detail.
+2.2.1
+
+Naive-Bayes Methods
+
+Kupiec et al. (1995) describe a method derived from Edmundson (1969) that is able
+to learn from data. The classification function categorizes each sentence as worthy
+of extraction or not, using a naive-Bayes classifier. Let s be a particular sentence,
+S the set of sentences that make up the summary, and F1 , . . . , Fk the features.
+Assuming independence of the features:
+Qk
+P (s ∈ S | F1 , F2 , ..Fk ) =
+
+| s ∈ S) · P (s ∈ S)
+Qk
+i=1 P (Fi )
+
+i=1 P (Fi
+
+(1)
+
+The features were compliant to (Edmundson, 1969), but additionally included the
+sentence length and the presence of uppercase words. Each sentence was given a
+score according to (1), and only the n top sentences were extracted. To evaluate
+the system, a corpus of technical documents with manual abstracts was used in
+the following way: for each sentence in the manual abstract, the authors manually
+analyzed its match with the actual document sentences and created a mapping
+(e.g. exact match with a sentence, matching a join of two sentences, not matchable,
+etc.). The auto-extracts were then evaluated against this mapping. Feature analysis
+revealed that a system using only the position and the cue features, along with the
+sentence length sentence feature, performed best.
+Aone et al. (1999) also incorporated a naive-Bayes classifier, but with richer
+features. They describe a system called DimSum that made use of features like
+term frequency (tf ) and inverse document frequency (idf ) to derive signature words.4
+The idf was computed from a large corpus of the same domain as the concerned
+documents. Statistically derived two-noun word collocations were used as units for
+counting, along with single words. A named-entity tagger was used and each entity
+was considered as a single token. They also employed some shallow discourse analysis
+like reference to same entities in the text, maintaining cohesion. The references
 were resolved at a very shallow level by linking name aliases within a document
 like “U.S.” to “United States”, or “IBM” for “International Business Machines”.
 Synonyms and morphological variants were also merged while considering lexical

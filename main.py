@@ -55,6 +55,16 @@ def getTitle(path,file,parserDirectory):
         else:
             return "TITLE NOT FOUND "
 
+def writeFile(path,txtDirectory,file,parameter,dictionnaire):
+    if(parameter=="-t"):
+        my_file=open(path+txtDirectory+'/'+file.removesuffix(".pdf")+".txt","w+")
+        for i in dictionnaire:
+            my_file.write(i)
+            my_file.write(dictionnaire[i]+'\n')
+        my_file.close()
+    elif(parameter=="-x"):
+        my_file=open(file.removesuffix(".pdf")+".xml","w+")
+
 def get_info(path):
     parserDirectory = "parsers"
     txtDirectory = "txt"
@@ -71,6 +81,7 @@ def get_info(path):
                  os.path.isfile(path + fichiers) and fichiers.endswith(".pdf")]
     print(directory)
     for file in directory:
+        dictionnaire={}
         ## Appel pdftotext pour convertir les pdf en txt vers le dossier parserDirectory
         os.system("pdftotext " + '"' + path + file + '"' + " " + path + parserDirectory + "/" + '"' + (
                 file.removesuffix(".pdf") + ".txt") + '"')
@@ -81,13 +92,12 @@ def get_info(path):
             page = reader.getPage(0)
             page_content = page.extractText()
             #print(page_content)
-        my_file = open("tmp.txt", "w+")  # creation d'un fichier temporaire
 
         ## Ecriture nom du fichier
         name = file
         print("Nom du PDF")
         print(name, '\n')
-        my_file.write("Nom du PDF : " + name + '\n')
+        dictionnaire["Nom : "]=name #Stockage du nom du PDF dans le dictionnaire
         ###
         ## Ecriture Titre du pdf
         title = info.title
@@ -95,7 +105,7 @@ def get_info(path):
             title = "None"
         print("Titre du PDF")
         print(title, '\n')
-        my_file.write("Titre du PDF : " + title + '\n')
+        dictionnaire["Titre du PDF : "]=title
         ###
         ## Ecriture information auteur
         author = info.author
@@ -103,39 +113,28 @@ def get_info(path):
             author = getAuthor(path, file, parserDirectory)
         print("Auteur du PDF")
         print(author, '\n')
-        my_file.write("Auteur du PDF : " + author + '\n')
+        dictionnaire["Auteur du PDF : "]=author
         ###
         ## Ecriture emails
-        my_file.write("Email : ")
         for i in getEmail(path, file, parserDirectory):
-            my_file.write(i + " ")
-        my_file.write("\n")
+            ite=1
+            dictionnaire["Email "+str(ite)+" : "]=i
         ## Ecriture Contenu fichier PDF
         content = ""
         with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
             content = parse.read().decode("utf-8")
             regex = re.search('Abstract(.+?)(Introduction|1)', content, flags=re.IGNORECASE | re.DOTALL)
             try:
-                if regex:
-                    my_file.write("Abstract : " + regex.group(1))
-                else:
+                if not regex:
                     regex = re.search('\n\n(.+?)(Introduction|1)', content, flags=re.IGNORECASE | re.DOTALL)
-                    my_file.write("Abstract : " + regex.group(1))
+                dictionnaire["Abstract"] = regex.group(1)
             except AttributeError:
-                my_file.write("Abstract : NOT FOUND")
+                dictionnaire["Abstract"]="Abstract : NOT FOUND"
             parse.close()
         ###
         # Ecriture references
-        my_file.write("\nReferences : " + getReferences(path,file,parserDirectory) + '\n')
-
-        my_file.close()  # fermeture du fichier
-
-        name = name.removesuffix(".pdf")  # va servir pour créer le .txt ainsi que le sous répertoire
-        txt_name = name + ".txt"  # pour renommer le fichier
-        os.rename("tmp.txt", txt_name)  # appel systeme pour renommer le fichier pour en faire un txt
-        shutil.move(txt_name, path + txtDirectory)  # deplacer le fichier dans le sous répertoire
-
-
+        dictionnaire["References : "]=getReferences(path,file,parserDirectory)
+        writeFile(path,txtDirectory,file,"-t",dictionnaire)
 if __name__ == '__main__':
     path = input("Tapez le chemin du dossier (exemple '../Corpus_2021' : \n")
     get_info(path)

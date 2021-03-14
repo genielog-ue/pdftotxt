@@ -1,8 +1,8 @@
-Nom du PDF : Iria_Juan-Manuel_Gerardo.pdf
+Nom : Iria_Juan-Manuel_Gerardo.pdf
 Titre du PDF : On the Development of the RST Spanish Treebank
 Auteur du PDF : Iria da Cunha ; Juan-Manuel Torres-Moreno ; Gerardo Sierra
-Email : iria.dacunha@upf.edu juan-manuel.torres@univavignon.fr gsierram@iingen.unam. 
-Abstract : 
+Email 1 : gsierram@iingen.unam.
+Abstract
 In this article we present the RST Spanish
 Treebank, the first corpus annotated with
 rhetorical relations for this language. We

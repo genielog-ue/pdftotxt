@@ -1,8 +1,8 @@
-Nom du PDF : kessler94715.pdf
+Nom : kessler94715.pdf
 Titre du PDF : None
 Auteur du PDF : None
-Email : remy.kessler@univ-ubs.fr nicolas.bechet@irisa.fr giuseppe.berio@univ-ubs.fr SemEval@NAACL-HLT 
-Abstract : —We describe a corpus analysis method to extract
+Email 1 : SemEval@NAACL-HLT
+Abstract—We describe a corpus analysis method to extract
 terminology from a collection of technical specifications in the
 field of construction. Using statistics and word n-grams analysis,
 we extract the terminology of the domain and then perform

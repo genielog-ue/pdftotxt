@@ -1,8 +1,8 @@
-Nom du PDF : kesslerMETICS-ICDIM2019.pdf
+Nom : kesslerMETICS-ICDIM2019.pdf
 Titre du PDF : None
 Auteur du PDF : None
-Email : remy.kessler@univ-ubs.fr nicolas.bechet@irisa.fr gudrun.ledegen@univ-rennes2.fr frederic.pugniere-saavedra@univ-ubs.fr 
-Abstract : —In order to better adapt to society, an association
+Email 1 : frederic.pugniere-saavedra@univ-ubs.fr
+Abstract—In order to better adapt to society, an association
 has developed a web chat application that allows anyone to
 express and share their concerns and anguishes. Several thousand
 anonymous conversations have been gathered and form a new
