@@ -177,8 +177,10 @@ def getTablePdf(dictionary, id):
         id = id.split(",")
         try:
             for i in id:
-                print(id)
-                table.append(dictionary[int(i)])  # passage de i de str en int car les clés du dictionnaire sont de type int
+                try:
+                    table.append(dictionary[int(i)])  # passage de i de str en int car les clés du dictionnaire sont de type int
+                except:
+                    pass
         except KeyError:
             print("Wrong id : "+i)
     return table
