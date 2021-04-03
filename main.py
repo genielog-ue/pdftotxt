@@ -68,15 +68,15 @@ def writeFile(path, txtDirectory, file, parameter, dictionnaire):
         my_file = open(file.removesuffix(".pdf") + ".xml", "w+")
         my_file.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
         my_file.write("<article>\n")
-        my_file.write("<preamble>"+dictionnaire["Titre du PDF : "].replace("\n"," ")+"</preamble>")
-        my_file.write("<titre>"+dictionnaire["Titre du PDF : "].replace("\n"," ")+"</titre>")
-        my_file.write("<auteur>"+dictionnaire["Auteur du PDF : "].replace("\n"," ")+"</titre>")
-        my_file.write("<biblio>"+dictionnaire["References : "].replace("\n"," ")+"</biblio>")
+        my_file.write("<preamble>" + dictionnaire["Titre du PDF : "].replace("\n", " ") + "</preamble>")
+        my_file.write("<titre>" + dictionnaire["Titre du PDF : "].replace("\n", " ") + "</titre>")
+        my_file.write("<auteur>" + dictionnaire["Auteur du PDF : "].replace("\n", " ") + "</titre>")
+        my_file.write("<biblio>" + dictionnaire["References : "].replace("\n", " ") + "</biblio>")
         my_file.write("\n</article>")
         my_file.close()
 
 
-def get_info(path):
+def get_info(path,directory):
     """
 
     :param path: Chemin absolu ou relatif du dossier de PDF
@@ -92,9 +92,6 @@ def get_info(path):
     reinitDirectory(path, parserDirectory, txtDirectory)
     ###
     # Récuperation des fichiers pdfs
-
-    directory = [fichiers for fichiers in os.listdir(path) if
-                 os.path.isfile(path + fichiers) and fichiers.endswith(".pdf")]
     print(directory)
     for file in directory:
         dictionnaire = {}
@@ -118,7 +115,7 @@ def get_info(path):
         title = info.title
         if title is None or not title:
             title = "None"
-        dictionnaire["Titre du PDF : "]=title
+        dictionnaire["Titre du PDF : "] = title
         ###
 
         ## Ecriture information auteur
@@ -148,9 +145,49 @@ def get_info(path):
         ###
         # Ecriture references
         dictionnaire["References : "] = getReferences(path, file, parserDirectory)
+        # Ecriture du fichier
         writeFile(path, txtDirectory, file, "-t", dictionnaire)
+
+
+def getPdfs(path):
+    if path[-1] != '/':
+        path += '/'  # Rajoute le / si absent au path afin d'eviter les problemes de chemin
+    directory = [fichiers for fichiers in os.listdir(path) if
+                 os.path.isfile(path + fichiers) and fichiers.endswith(".pdf")]
+    dictionary = {}
+    counter = 1
+    for pdf in directory:
+        dictionary[counter] = pdf
+        counter += 1
+    return dictionary
+
+
+def showPdfs(dictionary):
+    for item in dictionary:
+        print('{0:40} {1}'.format(dictionary[item][0:40], item))
+
+
+def getTablePdf(dictionary, id):
+    table = []
+    if id == '*':
+        for item in dictionary:
+            table.append(dictionary[item])
+    else:
+        id = id.replace(" ", ",")
+        id = id.split(",")
+        try:
+            for i in id:
+                print(id)
+                table.append(dictionary[int(i)])  # passage de i de str en int car les clés du dictionnaire sont de type int
+        except KeyError:
+            print("Wrong id : "+i)
+    return table
 
 
 if __name__ == '__main__':
     path = input("Tapez le chemin du dossier (exemple '../Corpus_2021' : \n")
-    get_info(path)
+    dict = getPdfs(path)
+    showPdfs(dict)
+    id = input("Tapez les identifiants des pdf a convertir (1 2 3 ou 1,2,3) (* pour tous) : \n")
+    directory = getTablePdf(dict, id.lstrip())
+    get_info(path,directory)
