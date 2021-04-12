@@ -39,21 +39,31 @@ Pour l'utiliser, taper la commande :
   1
   ['example1.pdf']
   ```
-  Le PDF est converti dans le sous-dossier XML et/ou TXT selon l'option choisie.
-
   
 ## Syntaxe:
+Après le choix du/des PDF à convertir, choisir le format de sortie : 
   
   ```
   [-t] Pour convertir le PDF en un fichier TXT
   ```
   ```
   [-x] Pour convertir le PDF en un fichier XML sous la forme :
+  
   <article>      
-    <preamble> Le nom du fichier d’origine </preamble>
-    <titre> Le titre du papier </titre>
-    <auteur> La section auteurs et leur adresse </auteur>
-    <abstract> Le résumé de l’article </abstract>
-    <biblio> Les références bibliographiques du papier</biblio>
+      <preamble> Le nom du fichier d’origine </preamble>
+      <titre> Le titre du papier </titre>
+      <auteurs>
+      <auteur> L’auteur A et son adresse courriel</auteur>
+      <affiliation> L’affiliation de l’auteur A et son adresse</affiliation>
+      <auteur> L’auteur B et son adresse courriel</auteur>
+      <affiliation> L’affiliation de l’auteur B et son adresse</affiliation>
+      ...
+      <auteurs/>
+      <abstract> Le résumé de l’article</abstract>
+      <introduction> La introduction</introduction>
+      <corps> Le développement du papier</corps>
+      <conclusion> La conclusion du papier</conclusion>
+      <discussion> La discussion du papier</discussion>
+      <biblio> Les références bibliographiques du papier</biblio>
   </article>
   ```
