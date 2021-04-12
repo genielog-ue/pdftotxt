@@ -8,17 +8,39 @@ Réalisé par Romain Le Talour, Corentin Leconte, Thibaut Quilleré dans le cadr
 
 - Prise en charge de fichier PDF.
 
-- Prend en entrée un dossier contenant un ou des fichiers PDF et créé un sous-dossier pour y déposer les fichier PDF convertis en TXT (du même nom).
+- Prend en entrée un dossier contenant un ou des fichiers PDF et créé un sous-dossier pour y déposer les fichier PDF convertis en TXT ou XML (du même nom).
 
 - Si un sous-dossier est déjà existant, il sera supprimé et remplacé par le nouveau.
   
 ## Comment l'utiliser:
 
-  `$ pdftotxt.py [-option] abc.pdf`
+Avec pdftotxt vous pouvez convertir un fichier PDF de type scientifique vers un fichier TXT ou XML.
+Pour l'utiliser, taper la commande :
+
+  `$ python pdftotxt.py`
   
-  Si le PDF cible n'est pas dans le répertoire du programme taper :
+  A l'exécution, entrez le répertoire contenant le ou les PDF à traiter.
   
-  `$ pdftotxt.py [-option] ../path/to/abc.pdf`
+  ```
+  $ python pdftotxt.py
+  Tapez le chemin du dossier (exemple '../Corpus_2021' :
+  ../directory
+  ```
+  
+  Ensuite un menu listera les PDF disponibles à la conversion dans le répertoire courant.
+  
+  ```
+  example1.pdf             1
+  example2.pdf             2
+  example3.pdf             3
+  example4.pdf             4
+  
+  Tapez les identifiants des pdf a convertir (1 2 3 ou 1,2,3) (* pour tous) : 
+  1
+  ['example1.pdf']
+  ```
+  Le PDF est converti dans le sous-dossier XML et/ou TXT selon l'option choisie.
+
   
 ## Syntaxe:
   
