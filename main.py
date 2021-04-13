@@ -7,6 +7,13 @@ from PyPDF2 import PdfFileReader
 
 
 def reinitDirectory(path, parserDirectory, txtDirectory):
+    """
+    Détruit et recrée les dossiers indiqués par parserDirectory et txtDirectory
+    :param path: pathfile du dossier traité
+    :param parserDirectory: pathfile relatif au path du dossier des fichiers parsés par pdf2txt
+    :param txtDirectory: pathfile relatif au path du dossier des fichiers de sortie
+    :return: None
+    """
     ### Destruction et Creation du repertoire txt
     if not os.path.exists(path + txtDirectory):
         os.mkdir(path + txtDirectory)
@@ -22,12 +29,27 @@ def reinitDirectory(path, parserDirectory, txtDirectory):
 
 
 def getAuthor(path, file, parserDirectory):
+    """
+    TODO A COMPLETER
+    Récupère les auteurs d'un PDF
+    :param path: pathfile du dossier traité
+    :param file: fichier en cours de traitement par get_info()
+    :param parserDirectory: pathfile relatif au path du dossier des fichiers parsés par pdf2txt
+    :return: Tableau contenant les auteurs
+    """
     author = "None"
 
     return author
 
 
 def getEmail(path, file, parserDirectory):
+    """
+    Récupère tout les emails trouvés dans le fichier parsé
+    :param path: pathfile du dossier traité
+    :param file: fichier en cours de traitement par get_info()
+    :param parserDirectory: pathfile relatif au path du dossier des fichiers parsés par pdf2txt
+    :return: Tableau contenant tout les emails trouvés dans le pdf
+    """
     with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
         content = parse.read().decode("utf-8")
         regex = re.findall(r'[\w.-]+@[\w.-]+', content)
@@ -36,6 +58,13 @@ def getEmail(path, file, parserDirectory):
 
 
 def getReferences(path, file, parserDirectory):
+    """
+    Méthode pour récupérer les références du PDF
+    :param path: pathfile du dossier traité
+    :param file: fichier en cours de traitement par get_info()
+    :param parserDirectory: pathfile relatif au path du dossier des fichiers parsés par pdf2txt
+    :return: String contenant la Reference
+    """
     with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
         content = parse.read().decode("utf-8")
         regex = re.findall(r'(?<=References).*', content, flags=re.IGNORECASE | re.DOTALL)
@@ -47,6 +76,14 @@ def getReferences(path, file, parserDirectory):
 
 
 def getTitle(path, file, parserDirectory):
+    """
+    TODO // A COMPLETER
+    Méthode pour récupérer le titre du PDF
+    :param path: pathfile du dossier traité
+    :param file: fichier en cours de traitement par get_info()
+    :param parserDirectory: pathfile relatif au path du dossier des fichiers parsés par pdf2txt
+    :return: Titre du PDF
+    """
     with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
         content = parse.read().decode("utf-8")
         parse.close()
@@ -58,6 +95,15 @@ def getTitle(path, file, parserDirectory):
 
 
 def writeFile(path, txtDirectory, file, parameter, dictionnaire):
+    """
+    Ecrit le fichier de sortie en .txt ou .xml selon la variable parameter
+    :param path: pathfile du dossier traité
+    :param txtDirectory: pathfile relatif au path du dossier des sorties
+    :param file: nom du fichier
+    :param parameter: arguments -> -t || -x
+    :param dictionnaire: dictionnaire contenant les parties recherchées du PDF
+    :return: None
+    """
     if parameter == "-t":
         my_file = open(path + txtDirectory + '/' + file.removesuffix(".pdf") + ".txt", "w+")
         for i in dictionnaire:
@@ -78,7 +124,7 @@ def writeFile(path, txtDirectory, file, parameter, dictionnaire):
 
 def get_info(path,directory):
     """
-
+    Méthode principale pour récupérer toutes les informations présentes dans un fichier PDF
     :param path: Chemin absolu ou relatif du dossier de PDF
     param parameter: -t ou -x pour construire le fichier de sortie en .txt ou .xml
     """
@@ -150,6 +196,11 @@ def get_info(path,directory):
 
 
 def getPdfs(path):
+    """
+    Récupère tout les PDF présents dans le dossier indiqué
+    :param path: pathfile du dossier traité
+    :return: dictionnaire (clé : int(id),pathfile du PDF)
+    """
     if path[-1] != '/':
         path += '/'  # Rajoute le / si absent au path afin d'eviter les problemes de chemin
     directory = [fichiers for fichiers in os.listdir(path) if
@@ -163,11 +214,22 @@ def getPdfs(path):
 
 
 def showPdfs(dictionary):
+    """
+    Print tout les PDF et les clés du dictionnaire des PDF trouvés dans le dossier traité
+    :param dictionary: dictionnaire de tout les PDF présents dans le dossier traité
+    :return: None
+    """
     for item in dictionary:
         print('{0:40} {1}'.format(dictionary[item][0:40], item))
 
 
 def getTablePdf(dictionary, id):
+    """
+    Méthode utilisée pour récupérer les PDF voulus par l'utilisateur
+    :param dictionary: dictionnaire des fichiers PDF trouvés dans le dossier
+    :param id: tableau d'id récupéré de l'utilisateur pour traiter seulement les PDF voulus
+    :return: table contenant les pdf a traiter
+    """
     table = []
     if id == '*':
         for item in dictionary:
