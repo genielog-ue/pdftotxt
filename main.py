@@ -209,7 +209,7 @@ def get_info(path, directory):
 
             ## Ecriture nom du fichier
             name = file
-            dictionnaire["Nom : "] = name  # Stockage du nom du PDF dans le dictionnaire
+            dictionnaire["Nom du PDF : "] = name  # Stockage du nom du PDF dans le dictionnaire
             ###
 
             ## Ecriture Titre du pdf
@@ -249,6 +249,7 @@ def get_info(path, directory):
             # Ecriture du fichier
             writeFile(path, txtDirectory, file, parameters, dictionnaire)
         else:
+            dictionnaire = {}
             writeFile(path, xmlDirectory, file, parameters, dictionnaire)
 
 
