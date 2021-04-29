@@ -107,7 +107,7 @@ def getIntroduction(path, file, parserDirectory):
         regex = re.findall(r'(?<=Introduction).*', content, flags=re.IGNORECASE | re.DOTALL)
         parse.close()
         if regex:
-            return regex
+            return regex[0]
         else:
             return "INTRODUCTION NOT FOUND"
 
@@ -115,8 +115,12 @@ def getIntroduction(path, file, parserDirectory):
 def getConclusion(path, file, parserDirectory):
     with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
         content = parse.read().decode("utf-8")
+        regex=re.findall(r'(?<=Conclusion).*',content,flags=re.IGNORECASE | re.DOTALL)
         parse.close()
-        ###TODO
+        if regex:
+            return regex[0]
+        else:
+            return "CONCLUSION NOT FOUND"
 
 
 def getDiscussion(path, file, parserDirectory):
@@ -129,7 +133,15 @@ def getDiscussion(path, file, parserDirectory):
         else:
             return "DISCUSSION NOT FOUND"
 
-
+def getCorps(path,file,parserDirectory):
+    with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
+        content = parse.read().decode("utf-8")
+        regex = re.search(r"((?<=^II)|(?<=^2 [A-Z]))(.*)((?=([0-9]|).Conclusion.+$)|(?=[0-9].Results.+$))", content, flags=re.IGNORECASE | re.DOTALL | re.MULTILINE)
+        parse.close()
+        if regex:
+            return regex.group(2)
+        else:
+            return "CORPS NOT FOUND"
 def writeFile(path, fileDirectory, file, parameter, dictionnaire):
     """
      Ecrit le fichier de sortie en .txt ou .xml selon la variable parameter
@@ -147,21 +159,21 @@ def writeFile(path, fileDirectory, file, parameter, dictionnaire):
             my_file.write(dictionnaire[i] + '\n')
         my_file.close()
     elif parameter == "-x":
-        my_file = open(file.removesuffix(".pdf") + ".xml", "w+")
+        my_file = open(path+fileDirectory+'/'+file.removesuffix(".pdf") + ".xml", "w+")
         my_file.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
         my_file.write("<article>\n")
-        my_file.write("<preamble>" + dictionnaire["Nom du PDF : "].replace("\n", " ") + "</preamble>")
-        my_file.write("<titre>" + dictionnaire["Titre du PDF : "].replace("\n", " ") + getTitle(path, file, parserDirectory="xml") + "</titre>")
+        my_file.write("<preamble>" + dictionnaire["Nom du PDF : "].replace("\n", " ") + "</preamble>\n")
+        my_file.write("<titre>" + dictionnaire["Titre du PDF : "].replace("\n", " ")  + "</titre>\n")
         my_file.write("<auteurs>\n")
-        my_file.write("<auteur>" + dictionnaire["Auteur du PDF : "].replace("\n", " ") + "</titre>")
-        my_file.write("<affiliation>" + dictionnaire[""].replace("\n", " ") + "</affiliation>")
+        my_file.write("<auteur>" + dictionnaire["Auteur du PDF : "].replace("\n", " ") + "</titre>\n")
+        #my_file.write("<affiliation>" + dictionnaire[""].replace("\n", " ") + "</affiliation>")
         my_file.write("</auteurs>\n")
-        my_file.write("<abstract>" + dictionnaire["Abstract : "].replace("\n", " ") + "</abstract>")
-        my_file.write("<introduction>" + dictionnaire["Introduction : "].replace("\n", " ") + "</introduction>")
-        my_file.write("<corps>" + dictionnaire["Développement : "].replace("\n", " ") + "</corps>")
-        my_file.write("<conclusion>" + dictionnaire["Conclusion : "].replace("\n", " ") + "</conclusion>")
-        my_file.write("<discussion>" + dictionnaire["Discussion : "].replace("\n", " ") + "</discussion>")
-        my_file.write("<biblio>" + dictionnaire["References : "].replace("\n", " ") + "</biblio>")
+        my_file.write("<abstract>" + dictionnaire["Abstract"].replace("\n", " ") + "</abstract>\n")
+        my_file.write("<introduction>" + dictionnaire["Introduction:"].replace("\n", " ") + "</introduction>\n")
+        my_file.write("<corps>" + dictionnaire["Corps :"].replace("\n", " ") + "</corps>\n")
+        my_file.write("<conclusion>" + dictionnaire["Conclusion:"].replace("\n", " ") + "</conclusion>\n")
+        #my_file.write("<discussion>" + dictionnaire["Discussion : "].replace("\n", " ") + "</discussion>")
+        my_file.write("<biblio>" + dictionnaire["References : "].replace("\n", " ") + "</biblio>\n")
         my_file.write("\n</article>")
         my_file.close()
 
@@ -173,8 +185,7 @@ def get_info(path, directory):
     param parameter: -t ou -x pour construire le fichier de sortie en .txt ou .xml
     """
     parserDirectory = "parsers"
-    txtDirectory = "txt"
-    xmlDirectory = "xml"
+    outputDirectory = "ParserOutput"
 
     ###
     if path[-1] != '/':
@@ -182,23 +193,15 @@ def get_info(path, directory):
 
     #choix du type de conversion
     parameters = str(input("Choix du type de conversion : (-t pour .txt ou -x pour .xml) \n"))
-
-    if parameters == "-t":
-        ### Reinitialisation des sous-repertoires parsers et txt du dossier path
-        reinitDirectory(path, parserDirectory, txtDirectory)
-    else:
-        ### Reinitialisation des sous-repertoires parsers et xml du dossier path
-        reinitDirectory(path, parserDirectory, xmlDirectory)
+    reinitDirectory(path, parserDirectory, outputDirectory)
 
     ###
     # Récuperation des fichiers pdfs
-    print(directory)
     for file in directory:
-        if parameters == "-t":
             dictionnaire = {}
             ## Appel pdftotext pour convertir les pdf en txt vers le dossier parserDirectory
             os.system("pdftotext " + '"' + path + file + '"' + " " + path + parserDirectory + "/" + '"' + (
-                    file.removesuffix(".pdf") + ".txt") + '"')
+                    file.removesuffix(".pdf") + ".txt") + '"'+ " -raw -nopgbrk")
             with open(path + file, 'rb') as f:
                 reader = PdfFileReader(f)
                 info = reader.getDocumentInfo()
@@ -227,10 +230,23 @@ def get_info(path, directory):
             ###
 
             ## Ecriture emails
+            ite = 1
             for i in getEmail(path, file, parserDirectory):
-                ite = 1
                 dictionnaire["Email " + str(ite) + " : "] = i
+                ite=ite+1
             ###
+            ###Recherche introduction
+            introduction=" "+getIntroduction(path,file,parserDirectory)
+            if introduction:
+                dictionnaire["Introduction:"]=introduction
+            ## Recherche conclusion
+            conclusion=" "+getConclusion(path, file, parserDirectory)
+            if conclusion:
+                dictionnaire["Conclusion:"]=conclusion
+            ##Recherche corps
+            corps=" "+getCorps(path,file,parserDirectory)
+            if corps:
+                dictionnaire["Corps :"]=corps
             ## Ecriture Contenu fichier PDF
             content = ""
             with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
@@ -247,10 +263,8 @@ def get_info(path, directory):
             # Ecriture references
             dictionnaire["References : "] = getReferences(path, file, parserDirectory)
             # Ecriture du fichier
-            writeFile(path, txtDirectory, file, parameters, dictionnaire)
-        else:
-            dictionnaire = {}
-            writeFile(path, xmlDirectory, file, parameters, dictionnaire)
+            writeFile(path, outputDirectory, file, parameters, dictionnaire)
+
 
 
 def getPdfs(path):
