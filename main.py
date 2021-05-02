@@ -104,10 +104,10 @@ def getAffiliation(path, file, parserDirectory):
 def getIntroduction(path, file, parserDirectory):
     with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
         content = parse.read().decode("utf-8")
-        regex = re.findall(r'(?<=Introduction).*', content, flags=re.IGNORECASE | re.DOTALL)
+        regex = re.search(r'(^.{0,15}(?<=Introduction).{0,30}$)(.*?)((?=^.{0,30}[^\.\:]$))', content, flags=re.MULTILINE | re.IGNORECASE | re.DOTALL)
         parse.close()
         if regex:
-            return regex[0]
+            return regex.group(0)
         else:
             return "INTRODUCTION NOT FOUND"
 
@@ -115,13 +115,13 @@ def getIntroduction(path, file, parserDirectory):
 def getConclusion(path, file, parserDirectory):
     with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
         content = parse.read().decode("utf-8")
-        regex = re.search(r'(^.{0,15}(?<=Conclusion).{0,30}$)(.*?)((?=^.{0,30}[^\.\:]$)).*', content,
+        regex = re.search(r'(^.{0,15}(?<=Conclusion).{0,30}$)(.*?)((?=^.{0,30}[^\.\:]$))', content,
                           flags=re.MULTILINE | re.DOTALL | re.IGNORECASE)
         if regex:
             parse.close()
             return regex.group(0)
         else:
-            regex = re.search(r'(^.{0,15}(?<=Results).{0,30}$)(.*?)((?=^.{0,30}[^\.\:]$)).*', content,
+            regex = re.search(r'(^.{0,15}(?<=Results).{0,30}$)(.*?)((?=^.{0,30}[^\.\:]$))', content,
                               flags=re.MULTILINE | re.DOTALL | re.IGNORECASE)
             parse.close()
             if regex:
