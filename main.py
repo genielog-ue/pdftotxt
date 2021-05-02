@@ -54,7 +54,10 @@ def getEmail(path, file, parserDirectory):
         content = parse.read().decode("utf-8")
         regex = re.findall(r'[\w.-]+@[\w.-]+', content)
         parse.close()
-        return regex
+        if regex:
+            return regex
+        else:
+            return ["EMAIL NOT FOUND"]
 
 
 def getReferences(path, file, parserDirectory):
@@ -77,7 +80,6 @@ def getReferences(path, file, parserDirectory):
 
 def getTitle(path, file, parserDirectory):
     """
-    TODO // A COMPLETER
     Méthode pour récupérer le titre du PDF
     :param path: pathfile du dossier traité
     :param file: fichier en cours de traitement par get_info()
@@ -85,20 +87,18 @@ def getTitle(path, file, parserDirectory):
     :return: Titre du PDF
     """
     with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
-        content = parse.read().decode("utf-8")
-        parse.close()
-        regex = re.search("TODO ", content, flags=re.IGNORECASE | re.DOTALL)
-        if regex:
-            return regex
+        title = parse.readline() + parse.readline();
+        if title:
+            return str(title)
         else:
-            return "TITLE NOT FOUND "
+            return "TITLE NOT FOUND"
 
 
 def getAffiliation(path, file, parserDirectory):
     with open(path + parserDirectory + '/' + (file.removesuffix(".pdf") + ".txt"), 'rb') as parse:
         content = parse.read().decode("utf-8")
         parse.close()
-        ###TODO
+        ###TODO AFFILIATION
 
 
 def getIntroduction(path, file, parserDirectory):
@@ -170,15 +170,21 @@ def writeFile(path, fileDirectory, file, parameter, dictionnaire):
             my_file.write(dictionnaire[i] + '\n')
         my_file.close()
     elif parameter == "-x":
+        find = True
         my_file = open(path + fileDirectory + '/' + file.removesuffix(".pdf") + ".xml", "w+")
         my_file.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
         my_file.write("<article>\n")
         my_file.write("<preamble>" + dictionnaire["Nom du PDF : "].replace("\n", " ") + "</preamble>\n")
         my_file.write("<titre>" + dictionnaire["Titre du PDF : "].replace("\n", " ") + "</titre>\n")
-        my_file.write("<auteurs>\n")
-        my_file.write("<auteur>" + dictionnaire["Auteur du PDF : "].replace("\n", " ") + "</titre>\n")
+        my_file.write("<auteurs>" + dictionnaire["Auteur du PDF : "].replace("\n", " ") + "</auteurs>\n")
+        ite = 1
+        while find == True:
+            if "Email " + str(ite) + " : " in dictionnaire:
+                my_file.write("<email>" + dictionnaire["Email " + str(ite) + " : "].replace("\n", " ") + "</email>\n")
+                ite = ite + 1
+            else:
+                find = False
         # my_file.write("<affiliation>" + dictionnaire[""].replace("\n", " ") + "</affiliation>")
-        my_file.write("</auteurs>\n")
         my_file.write("<abstract>" + dictionnaire["Abstract"].replace("\n", " ") + "</abstract>\n")
         my_file.write("<introduction>" + dictionnaire["Introduction:"].replace("\n", " ") + "</introduction>\n")
         my_file.write("<corps>" + dictionnaire["Corps :"].replace("\n", " ") + "</corps>\n")
@@ -211,7 +217,7 @@ def get_info(path, directory):
     for file in directory:
         dictionnaire = {}
         ## Appel pdftotext pour convertir les pdf en txt vers le dossier parserDirectory
-        os.system("pdftotext " + '"' + path + file + '"' + " " + path + parserDirectory + "/" + '"' + (
+        os.system("pdftotext " + '"' + path + file + '"' + ' ' + '"' + path + parserDirectory + "/" + (
                 file.removesuffix(".pdf") + ".txt") + '"' + " -raw -nopgbrk")
         with open(path + file, 'rb') as f:
             reader = PdfFileReader(f)
@@ -229,7 +235,7 @@ def get_info(path, directory):
         ## Ecriture Titre du pdf
         title = info.title
         if title is None or not title:
-            title = "None"
+            title = getTitle(path, file, parserDirectory)
         dictionnaire["Titre du PDF : "] = title
         ###
 
