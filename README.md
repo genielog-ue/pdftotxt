@@ -14,24 +14,56 @@ Réalisé par Romain Le Talour, Corentin Leconte, Thibaut Quilleré dans le cadr
   
 ## Comment l'utiliser:
 
-  `$ pdftotxt.py [-option] abc.pdf`
+Avec pdftotxt vous pouvez convertir un fichier PDF de type scientifique vers un fichier TXT ou XML.
+Pour l'utiliser, taper la commande :
+
+  `$ python pdftotxt.py`
   
-  Si le PDF cible n'est pas dans le répertoire du programme taper :
+  A l'exécution, entrez le répertoire contenant le ou les PDF à traiter.
   
-  `$ pdftotxt.py [-option] ../path/to/abc.pdf`
+  ```
+  $ python pdftotxt.py
+  Tapez le chemin du dossier (exemple '../Corpus_2021' :
+  ../directory
+  ```
+  
+  Ensuite un menu listera les PDF disponibles à la conversion dans le répertoire courant.
+  
+  ```
+  example1.pdf             1
+  example2.pdf             2
+  example3.pdf             3
+  example4.pdf             4
+  
+  Tapez les identifiants des pdf a convertir (1 2 3 ou 1,2,3) (* pour tous) : 
+  1
+  ['example1.pdf']
+  ```
   
 ## Syntaxe:
+Après le choix du/des PDF à convertir, choisir le format de sortie : 
   
   ```
   [-t] Pour convertir le PDF en un fichier TXT
   ```
   ```
   [-x] Pour convertir le PDF en un fichier XML sous la forme :
+  
   <article>      
-    <preamble> Le nom du fichier d’origine </preamble>
-    <titre> Le titre du papier </titre>
-    <auteur> La section auteurs et leur adresse </auteur>
-    <abstract> Le résumé de l’article </abstract>
-    <biblio> Les références bibliographiques du papier</biblio>
+      <preamble> Le nom du fichier d’origine </preamble>
+      <titre> Le titre du papier </titre>
+      <auteurs>
+      <auteur> L’auteur A et son adresse courriel</auteur>
+      <affiliation> L’affiliation de l’auteur A et son adresse</affiliation>
+      <auteur> L’auteur B et son adresse courriel</auteur>
+      <affiliation> L’affiliation de l’auteur B et son adresse</affiliation>
+      ...
+      <auteurs/>
+      <abstract> Le résumé de l’article</abstract>
+      <introduction> La introduction</introduction>
+      <corps> Le développement du papier</corps>
+      <conclusion> La conclusion du papier</conclusion>
+      <discussion> La discussion du papier</discussion>
+      <biblio> Les références bibliographiques du papier</biblio>
   </article>
   ```
