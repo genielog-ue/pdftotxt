@@ -161,7 +161,7 @@ def writeFile(path, fileDirectory, file, parameter, dictionnaire):
      :param file: nom du fichier
      :param parameter: arguments -> -t || -x
      :param dictionnaire: dictionnaire contenant les parties recherchées du PDF
-     :return: group de regex
+     :return: string matché
      """
     if parameter == "-t":
         my_file = open(path + fileDirectory + '/' + file.removesuffix(".pdf") + ".txt", "w+")
