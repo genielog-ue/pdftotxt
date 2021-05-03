@@ -176,7 +176,6 @@ def writeFile(path, fileDirectory, file, parameter, dictionnaire):
         my_file.write("<article>\n")
         my_file.write("<preamble>" + dictionnaire["Nom du PDF : "].replace("\n", " ") + "</preamble>\n")
         my_file.write("<titre>" + dictionnaire["Titre du PDF : "].replace("\n", " ") + "</titre>\n")
-        my_file.write("<auteurs>" + dictionnaire["Auteur du PDF : "].replace("\n", " ") + "</auteurs>\n")
         ite = 1
         while find == True:
             if "Email " + str(ite) + " : " in dictionnaire:
@@ -184,6 +183,15 @@ def writeFile(path, fileDirectory, file, parameter, dictionnaire):
                 ite = ite + 1
             else:
                 find = False
+        ite=1
+        find=True
+        while find==True:
+            if "Auteur " + str(ite) + " : " in dictionnaire:
+                my_file.write("<auteur>" + dictionnaire["Auteur " + str(ite) + " : "].replace("\n", " ") + "</auteur>\n")
+                ite=ite+1
+            else:
+                find= False
+
         # my_file.write("<affiliation>" + dictionnaire[""].replace("\n", " ") + "</affiliation>")
         my_file.write("<abstract>" + dictionnaire["Abstract"].replace("\n", " ") + "</abstract>\n")
         my_file.write("<introduction>" + dictionnaire["Introduction:"].replace("\n", " ") + "</introduction>\n")
@@ -239,17 +247,34 @@ def get_info(path, directory):
         dictionnaire["Titre du PDF : "] = title
         ###
 
-        ## Ecriture information auteur
+        ## Recherche de l'auteur dans les méta données
         author = info.author
-        if author is None or not author:
-            author = getAuthor(path, file, parserDirectory)
-        dictionnaire["Auteur du PDF : "] = author
+        ite=0
+        if author is not None:
+            for i in author.split(";"):
+                dictionnaire["Auteur " + str(ite+1) + " : "] = i
+                ite=ite+1
         ###
 
         ## Ecriture emails
         ite = 1
         for i in getEmail(path, file, parserDirectory):
             dictionnaire["Email " + str(ite) + " : "] = i
+            if author is None or not author and i!="EMAIL NOT FOUND": #si il n'y a pas d'auteurs dans les méta données, on recherche l'auteurs via les emails
+                try:
+                    email=i[0:i.index("@")]
+                    email=email.split(".")
+                    naming1=email[0]
+                    if len(email)>1:
+                        naming2=" "+email[1]
+                    else:
+                        naming2=""
+                    dictionnaire["Auteur " + str(ite) + " : "] = naming1+naming2
+                except:
+                    author="Author NOT FOUND"
+                    dictionnaire["Auteur "+ str(ite)+ " : "] = author
+            elif author is None or not author:
+                dictionnaire["Auteur "+ str(ite)+ " : "] = "AUTHOR NOT FOUND"
             ite = ite + 1
         ###
         ##Recherche introduction
