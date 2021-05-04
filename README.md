@@ -4,6 +4,12 @@ Réalisé par Romain Le Talour, Corentin Leconte, Thibaut Quilleré dans le cadr
 
 **Attention**, ce programme est dans un but scolaire et n'est pas destiné à être utilisé par le grand public.
 
+## Prérequis:
+
+Vous devez installer la dépendance pdftotext via la commande :
+
+`$ pip install pdftotext`
+
 ## Fonctionnalités:
 
 - Prise en charge de fichier PDF.
